@@ -141,9 +141,16 @@ def plateexist(filename, plate, exittime=Modules_PL.PL_date.registerdatetime()):
         filetxt.close()
         return platestatus
 
-def eraseplate_open(filepath): # EM DESENVOLVIMENTO
-    with open(filepath, 'r') as epo:
-        lines = epo.readlines()
+
+def eraseplate_openwrite(filename, plate, status): # EM DESENVOLVIMENTO
+    teste = status + ';' + plate
+    with open(filename, 'r') as epr: #ep stands for "eraseplate"
+        lines = epr.readlines()
+    with open(filename, 'w') as epw:
+        for line in lines:
+            if line.find(teste) == -1: #teste é uma varivável de teste
+                epw.write(line)
+
 
 def eraseplate(filename, plate): # EM DESENVOLVIMENTO
     print('Função para apagar registro')
@@ -151,9 +158,11 @@ def eraseplate(filename, plate): # EM DESENVOLVIMENTO
     if erase_opt == 'ENTRADA':
         print('Placa para apagar entrada: ') #virar input
         #se tiver saída registrada, bloquear
+        eraseplate_openwrite(filename, plate, 'ENTRADA')
     elif erase_opt == 'SAÍDA':
         print('Placa para apagar saída: ') #virar input
-        #Só apagar entradas de até 10 minutos atrás!
+        #Só apagar entradas de até 10 minutos atrás! #TO-DO
+        eraseplate_openwrite(filename, plate, 'SAIDA')
     else:
         print('Digite opção válida!')
 
