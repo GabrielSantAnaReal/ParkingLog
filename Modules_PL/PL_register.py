@@ -152,17 +152,17 @@ def eraseplate_openwrite(filename, plate, status): # EM DESENVOLVIMENTO
                 epw.write(line)
 
 
-def eraseplate(filename, plate): # EM DESENVOLVIMENTO
+def eraseplate(filename): # EM DESENVOLVIMENTO
     print('Função para apagar registro')
-    erase_opt = str(input('Deseja apagar uma "Entrada" ou "Saída"?')).strip().upper()
-    if erase_opt == 'ENTRADA':
-        print('Placa para apagar entrada: ') #virar input
+    erase_opt = str(input('Deseja apagar uma "Entrada" ou "Saída"?')).strip().upper()[0]
+    if erase_opt == 'E':
+        plate_opt = str(input('Placa para apagar entrada: '))
         #se tiver saída registrada, bloquear
-        eraseplate_openwrite(filename, plate, 'ENTRADA')
-    elif erase_opt == 'SAÍDA':
-        print('Placa para apagar saída: ') #virar input
+        eraseplate_openwrite(filename, plate_opt, 'ENTRADA')
+    elif erase_opt == 'S':
+        plate_opt = str(input('Placa para apagar saída: '))
         #Só apagar entradas de até 10 minutos atrás! #TO-DO
-        eraseplate_openwrite(filename, plate, 'SAIDA')
+        eraseplate_openwrite(filename, plate_opt, 'SAIDA')
     else:
         print('Digite opção válida!')
 
