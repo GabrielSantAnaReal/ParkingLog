@@ -44,6 +44,34 @@ def arquivo_ler(filename):
         filetxt.close()
 
 
+def arquivo_ler_entrada(filename): # EM DESENVOLVIMENTO
+    try:
+        filetxt = open(filename, 'rt', encoding='UTF-8')
+    except:
+        print('Erro ao ler o arquivo! Verifique se ele existe!')
+    else:
+        for linha in filetxt:
+            dadovehicle = linha.split(';')
+            dadovehicle[1] = dadovehicle[1].replace('\n', '')
+            if dadovehicle[0] == 'ENTRADA':
+                print(f'{dadovehicle[0]}/{dadovehicle[4]}/{dadovehicle[1]}/{dadovehicle[2]}/{dadovehicle[3]}\n')
+        filetxt.close()
+
+
+def arquivo_ler_saida(filename): # EM DESENVOLVIMENTO
+    try:
+        filetxt = open(filename, 'rt', encoding='UTF-8')
+    except:
+        print('Erro ao ler o arquivo! Verifique se ele existe!')
+    else:
+        for linha in filetxt:
+            dadovehicle = linha.split(';')
+            dadovehicle[1] = dadovehicle[1].replace('\n', '')
+            if dadovehicle[0] == 'SAIDA':
+                print(f'{dadovehicle[0]}/{dadovehicle[4]}/{dadovehicle[1]}/{dadovehicle[2]}/{dadovehicle[3]}\n')
+        filetxt.close()
+
+
  #criar variantes de arquivo_ler para:
  #ler somente entradas
  #ler somente saídas
