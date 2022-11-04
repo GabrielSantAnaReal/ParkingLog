@@ -143,26 +143,32 @@ def plateexist(filename, plate, exittime=Modules_PL.PL_date.registerdatetime()):
 
 
 def eraseplate_openwrite(filename, plate, status): # EM DESENVOLVIMENTO
-    teste = status + ';' + plate
-    with open(filename, 'r') as epr: #ep stands for "eraseplate"
-        lines = epr.readlines()
-    with open(filename, 'w') as epw:
-        for line in lines:
-            if line.find(teste) == -1: #teste é uma varivável de teste
-                epw.write(line)
+    try:
+        info_vehicle = status + ';' + plate
+        with open(filename, 'r') as epr: #ep stands for "eraseplate"
+            lines = epr.readlines()
+        with open(filename, 'w') as epw:
+            for line in lines:
+                if line.find(info_vehicle) == -1:
+                    epw.write(line)
+    except:
+        print('Algo deu errado! Tente novamente!')
 
 
 def eraseplate(filename): # EM DESENVOLVIMENTO
     print('Função para apagar registro')
-    erase_opt = str(input('Deseja apagar uma "Entrada" ou "Saída"?')).strip().upper()[0]
-    if erase_opt == 'E':
-        plate_opt = str(input('Placa para apagar entrada: '))
+    erase_opt = str(input('Deseja apagar uma "Entrada" ou "Saída"? ("FIM" para parar): '))
+    if erase_opt.strip().upper()[0] == 'E':
+        plate_opt = str(input('Placa para apagar entrada: ')).upper().strip()
         #se tiver saída registrada, bloquear
         eraseplate_openwrite(filename, plate_opt, 'ENTRADA')
-    elif erase_opt == 'S':
-        plate_opt = str(input('Placa para apagar saída: '))
+    elif erase_opt.strip().upper()[0] == 'S':
+        plate_opt = str(input('Placa para apagar saída: ')).upper().strip()
         #Só apagar entradas de até 10 minutos atrás! #TO-DO
         eraseplate_openwrite(filename, plate_opt, 'SAIDA')
+    elif erase_opt.strip().upper()[0] == 'F':
+        erase_opt = 'sair'
+        return erase_opt
     else:
         print('Digite opção válida!')
 

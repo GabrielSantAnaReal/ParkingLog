@@ -16,6 +16,8 @@ import Modules_PL.PL_list as Module_LIST
 import Modules_PL.PL_OS as Module_OS
 from time import sleep
 
+Module_OS.path_OS()
+
 datefilename = Module_DATE.PLdate_filename()
 #filename = '20220901.txt' #teste, substituir por data do dia
 filename = datefilename + '.txt'
@@ -23,7 +25,6 @@ if not Module_REGISTER.arquivo_existe(filename):
     Module_REGISTER.arquivo_criar(filename)
 
 while True:
-    Module_OS.path_OS()
     Module_UI.ui_menu('Parking Log APLHA',40)
     opt = int(input('Digite a opção desejada: '))
     if opt == 1:
@@ -62,7 +63,6 @@ while True:
     #inserir opções para:
     #ver somente cadastros de entrada #4
     #ver somente cadastros de saída #5
-    #apagar registro feito de forma indevida (entrada ou saída)
 
     elif opt == 4: #6
         # Cadastros de outro dia
@@ -71,6 +71,13 @@ while True:
         Module_LIST.vercadastros()
 
     elif opt == 5: #7
+        print()
+        print('ATENÇÃO: Esse menu apaga registros de forma permanente!')
+        print('PROSSIGA COM CUIDADO!')
+        print()
+        Module_REGISTER.eraseplate(filename)
+        print()
+    elif opt == 6: #8
         print('Saindo...')
         break
     else:
