@@ -9,6 +9,7 @@ import Modules_PL.PL_date
 #import PL_date #usado para teste
 
 
+# Verifica e cria arquivos
 def arquivo_existe(filename):
     try:
         filetxt = open(filename, 'rt', encoding='UTF-8')
@@ -29,6 +30,8 @@ def arquivo_criar(filename):
         print(f'Arquivo de registro [{filename}] criado com sucesso!')
 
 
+###############################################################################
+# Lê arquivos
 def arquivo_ler(filename):
     try:
         filetxt = open(filename, 'rt', encoding='UTF-8')
@@ -72,12 +75,8 @@ def arquivo_ler_saida(filename): # EM DESENVOLVIMENTO
         filetxt.close()
 
 
- #criar variantes de arquivo_ler para:
- #ler somente entradas
- #ler somente saídas
- #depois, vincular ao menu principal!
-
-
+###############################################################################
+# Registra entradas e saídas
 def reg_entrada(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     model_upper='DESCONHECIDO', color='DESCONHECIDO', 
     dateandtime=Modules_PL.PL_date.registerdatetime()):
@@ -112,7 +111,8 @@ def reg_saida(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     filetxt.write(f'SAIDA;{plate};{brand_upper}/{model_upper};{color};{dateandtime}\n')
 
 
-#Terminar (diminuir?)
+###############################################################################
+# Mostra quanto tempo ficou estacionado
 def readplate(filename, plate, exittime):
     try:
         filetxt = open(filename, 'rt', encoding='UTF-8')
@@ -144,8 +144,10 @@ def readplate(filename, plate, exittime):
         return diftime
 
 
+###############################################################################
+# Verifica se a placa já tem registro
 def plateexist(filename, plate, exittime=Modules_PL.PL_date.registerdatetime()):
-#def plateexist(filename, plate, exittime=PL_date.registerdatetime()):
+#def plateexist(filename, plate, exittime=PL_date.registerdatetime()): # Usado para teste
     try:
         filetxt = open(filename, 'rt', encoding='UTF-8')
     except:
@@ -170,6 +172,8 @@ def plateexist(filename, plate, exittime=Modules_PL.PL_date.registerdatetime()):
         return platestatus
 
 
+###############################################################################
+# Apaga registro de alguma placa
 def eraseplate_openwrite(filename, plate, status): # EM DESENVOLVIMENTO
     try:
         info_vehicle = status + ';' + plate

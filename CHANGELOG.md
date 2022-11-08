@@ -1,5 +1,15 @@
 # Changelog
 
+
+## [0.11] (2022-11-08)
+
+**Pequenas correções e implementações**
+
+- Adicionado ao menu principal opção de ver somente entradas ou saídas;
+- Pequenas correções e ajustes internos.
+
+
+
 ## [0.10] (2022-11-04)
 
 **Melhorias gerais e implementações**

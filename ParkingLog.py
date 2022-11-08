@@ -27,8 +27,9 @@ if not Module_REGISTER.arquivo_existe(filename):
 while True:
     Module_UI.ui_menu('Parking Log APLHA',40)
     opt = int(input('Digite a opção desejada: '))
+
     if opt == 1:
-        #Registra entradas
+        # Registra entradas
         print()
         while True:
             Module_UI.ui_options('Cadastro de entrada de veículos',40)
@@ -39,7 +40,7 @@ while True:
                 Module_REGISTER.reg_entrada(filename, textplate)
     
     elif opt == 2:
-        #Registra saídas
+        # Registra saídas
         while True:
             print()
             Module_UI.ui_options('Registro de saída de veículos',40)
@@ -54,32 +55,45 @@ while True:
                     sleep(0.8)
     
     elif opt == 3:
-        #Ver todos os cadastros do dia
+        # Ver todos os cadastros do dia
         print()
         Module_REGISTER.arquivo_ler(filename)
         pressenter = str(input('Pressione ENTER para voltar ao menu'))
         print()
 
-    #inserir opções para:
-    #ver somente cadastros de entrada #4
-    #ver somente cadastros de saída #5
-
-    elif opt == 4: #6
-        # Cadastros de outro dia
+    elif opt == 4:
+        # Ver somente entradas
         print()
-        print('FUNÇÃO EM DESENVOLVIMENTO')   
+        Module_REGISTER.arquivo_ler_entrada(filename)
+        pressenter = str(input('Pressione ENTER para voltar ao menu'))
+        print()
+
+    elif opt == 5:
+        # Ver somente saídas
+        print()
+        Module_REGISTER.arquivo_ler_saida(filename)
+        pressenter = str(input('Pressione ENTER para voltar ao menu'))
+        print()
+
+    elif opt == 6:
+        # Cadastros de outro dia
+        print() 
         Module_LIST.vercadastros()
 
-    elif opt == 5: #7
+    elif opt == 7:
+        # Apaga algum registro específico do dia
         print()
         print('ATENÇÃO: Esse menu apaga registros de forma permanente!')
         print('PROSSIGA COM CUIDADO!')
+        sleep(1)
         print()
         Module_REGISTER.eraseplate(filename)
         print()
-    elif opt == 6: #8
+
+    elif opt == 8:
         print('Saindo...')
         break
+
     else:
         print('Opção inválida! Tente novamente!')
         sleep(1.1)

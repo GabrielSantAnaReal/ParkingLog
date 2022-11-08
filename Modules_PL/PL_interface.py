@@ -19,9 +19,11 @@ def ui_menu(txt, n=40):
         1 - Cadastrar entrada veículos
         2 - Registrar saída de veículos
         3 - Ver cadastros do dia
-        4 - Ver cadastros de outro dia
-        5 - Apagar cadastros
-        6 - Sair do sistema''')
+        4 - Ver somente entradas
+        5 - Ver somente saídas
+        6 - Ver cadastros de outro dia
+        7 - Apagar cadastros
+        8 - Sair do sistema''')
     print('-'*n)
 
 
