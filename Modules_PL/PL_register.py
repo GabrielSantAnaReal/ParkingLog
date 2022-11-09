@@ -4,9 +4,7 @@ de leitura, gravação e criação dos respectivos arquivos.
 """
 
 from datetime import datetime
-from datetime import timedelta
 import Modules_PL.PL_date
-#import PL_date #usado para teste
 
 
 # Verifica e cria arquivos
@@ -42,12 +40,10 @@ def arquivo_ler(filename):
             dadovehicle = linha.split(';')
             dadovehicle[1] = dadovehicle[1].replace('\n', '')
             print(f'{dadovehicle[0]}/{dadovehicle[4]}/{dadovehicle[1]}/{dadovehicle[2]}/{dadovehicle[3]}\n')
-            #TO-DO: separar data e hora, e calcular tempo que ficou dentro do estacionamento
-    #finally:
         filetxt.close()
 
 
-def arquivo_ler_entrada(filename): # EM DESENVOLVIMENTO
+def arquivo_ler_entrada(filename):
     try:
         filetxt = open(filename, 'rt', encoding='UTF-8')
     except:
@@ -61,7 +57,7 @@ def arquivo_ler_entrada(filename): # EM DESENVOLVIMENTO
         filetxt.close()
 
 
-def arquivo_ler_saida(filename): # EM DESENVOLVIMENTO
+def arquivo_ler_saida(filename):
     try:
         filetxt = open(filename, 'rt', encoding='UTF-8')
     except:
@@ -80,9 +76,6 @@ def arquivo_ler_saida(filename): # EM DESENVOLVIMENTO
 def reg_entrada(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     model_upper='DESCONHECIDO', color='DESCONHECIDO', 
     dateandtime=Modules_PL.PL_date.registerdatetime()):
-#def reg_entrada(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
-#    model_upper='DESCONHECIDO', color='DESCONHECIDO', 
-#    dateandtime=PL_date.registerdatetime()): #usado para teste
     plate.upper()
     brand = str(input('Marca do veículo: '))
     brand_upper = brand.upper()
@@ -97,9 +90,6 @@ def reg_entrada(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
 def reg_saida(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     model_upper='DESCONHECIDO', color='DESCONHECIDO', 
     dateandtime=Modules_PL.PL_date.registerdatetime()):
-#def reg_saida(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
-#    model_upper='DESCONHECIDO', color='DESCONHECIDO', 
-#    dateandtime=PL_date.registerdatetime()): #usado para teste
     plate.upper()
     brand = str(input('Marca do veículo: '))
     brand_upper = brand.upper()
@@ -125,10 +115,9 @@ def readplate(filename, plate, exittime):
                 if dadovehicle[1] == plate:
                     entracedatetime = dadovehicle[4].replace('\n', '')
                     entracetime_datetime = datetime.strptime(entracedatetime, "%H:%M:%S-%d/%m/%Y")
-                    #print(entracetime_datetime) #teste
                     exittime_datetime = datetime.strptime(exittime, "%H:%M:%S-%d/%m/%Y")
                     diftime = exittime_datetime - entracetime_datetime
-                    print(f'Tempo estacionado: {diftime} (hh:mm:ss)') #tempo que ficou estacionado #TESTE
+                    print(f'Tempo estacionado: {diftime} (hh:mm:ss)') #tempo que ficou estacionado
                     
                     #diftime_str = str(diftime)
                     #diftime_str = diftime_str.split(':')
@@ -147,7 +136,6 @@ def readplate(filename, plate, exittime):
 ###############################################################################
 # Verifica se a placa já tem registro
 def plateexist(filename, plate, exittime=Modules_PL.PL_date.registerdatetime()):
-#def plateexist(filename, plate, exittime=PL_date.registerdatetime()): # Usado para teste
     try:
         filetxt = open(filename, 'rt', encoding='UTF-8')
     except:
@@ -174,7 +162,7 @@ def plateexist(filename, plate, exittime=Modules_PL.PL_date.registerdatetime()):
 
 ###############################################################################
 # Apaga registro de alguma placa
-def eraseplate_openwrite(filename, plate, status): # EM DESENVOLVIMENTO
+def eraseplate_openwrite(filename, plate, status):
     try:
         info_vehicle = status + ';' + plate
         with open(filename, 'r') as epr: #ep stands for "eraseplate"
@@ -187,12 +175,12 @@ def eraseplate_openwrite(filename, plate, status): # EM DESENVOLVIMENTO
         print('Algo deu errado! Tente novamente!')
 
 
-def eraseplate(filename): # EM DESENVOLVIMENTO
+def eraseplate(filename):
     print('Função para apagar registro')
     erase_opt = str(input('Deseja apagar uma "Entrada" ou "Saída"? ("FIM" para parar): '))
     if erase_opt.strip().upper()[0] == 'E':
         plate_opt = str(input('Placa para apagar entrada: ')).upper().strip()
-        #se tiver saída registrada, bloquear
+        #Se tiver saída registrada, bloquear
         eraseplate_openwrite(filename, plate_opt, 'ENTRADA')
     elif erase_opt.strip().upper()[0] == 'S':
         plate_opt = str(input('Placa para apagar saída: ')).upper().strip()
@@ -203,12 +191,3 @@ def eraseplate(filename): # EM DESENVOLVIMENTO
         return erase_opt
     else:
         print('Digite opção válida!')
-
-
-#funcionou testando dentro do módulo:
-'''
-if plateexist('20220901.txt', 'ABC1234', '20:40:00-06/09/2022') == True: #TESTE
-    print('True')
-else:
-    print('False')
-'''

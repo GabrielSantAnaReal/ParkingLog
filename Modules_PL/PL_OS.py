@@ -10,7 +10,6 @@ e então volta-se ao programa principal
 import platform
 import os
 from Modules_PL import PL_pathfile
-#import PL_pathfile #Usado só para teste
 from time import sleep
 
 
@@ -77,5 +76,3 @@ def path_OS():
     else:
         print('OS não suportado')
 
-
-#path_OS() #Usado somente para teste

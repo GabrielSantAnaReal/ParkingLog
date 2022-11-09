@@ -53,7 +53,7 @@ def firstaccess_windows():
 
 
 #Funções de leitura, criação e gravação de arquivos
-def existfile_dir(filepath):
+def existfile_dir(filepath): # Verifica se o arquivo de registro existe
     try:
         filedir = open(filepath, 'rt', encoding='UTF-8')
         filedir.close()
@@ -63,25 +63,25 @@ def existfile_dir(filepath):
         return True
 
 
-def createfile_dir(filepath):
+def createfile_dir(filepath): # Cria o arquivo de registro conforme solicitado
     try:
         filedir= open(filepath, 'wt+', encoding='UTF-8')
         filedir.close()
     except:
         print('Erro ao criar arquivo de registro!')
     '''else:
-        print(f'Arquivo de registro [{filepath}] criado com sucesso!')'''
+        print(f'Arquivo de registro [{filepath}] criado com sucesso!')''' #Manter?
 
 
-def readfile_dir(filepath):
-    testefile = 1 #teste
+def readfile_dir(filepath): # Lê o arquivo de registro
+    file_count = 1
     try:
         filedir = open(filepath, 'rt', encoding='UTF-8')
     except:
-        testefile = 0 #teste
+        file_count = 0
         print('Erro ao ler o arquivo! Verifique se ele existe!')
     else:
-        if testefile == 1:
+        if file_count == 1:
             for linha in filedir:
                 return linha
         filedir.close()
