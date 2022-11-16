@@ -19,6 +19,7 @@ from time import sleep
 Module_OS.path_OS()
 
 datefilename = Module_DATE.PLdate_filename()
+#TO-DO: pegar data antes de cada execução
 #filename = '20220901.txt' #teste, substituir por data do dia
 filename = datefilename + '.txt'
 if not Module_REGISTER.arquivo_existe(filename):
@@ -41,6 +42,7 @@ while True:
     
     elif opt == 2:
         # Registra saídas
+        #TO-DO: Melhorar saídas: se a placa existir, sugerir preencher dados
         while True:
             print()
             Module_UI.ui_options('Registro de saída de veículos',40)

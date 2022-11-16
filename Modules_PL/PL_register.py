@@ -76,7 +76,7 @@ def arquivo_ler_saida(filename):
 def reg_entrada(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     model_upper='DESCONHECIDO', color='DESCONHECIDO', 
     dateandtime=Modules_PL.PL_date.registerdatetime()):
-    plate.upper()
+    plate = plate.upper()
     brand = str(input('Marca do veículo: '))
     brand_upper = brand.upper()
     model = str(input('Modelo: '))
@@ -90,7 +90,7 @@ def reg_entrada(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
 def reg_saida(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     model_upper='DESCONHECIDO', color='DESCONHECIDO', 
     dateandtime=Modules_PL.PL_date.registerdatetime()):
-    plate.upper()
+    plate = plate.upper()
     brand = str(input('Marca do veículo: '))
     brand_upper = brand.upper()
     model = str(input('Modelo: '))
@@ -145,7 +145,7 @@ def plateexist(filename, plate, exittime=Modules_PL.PL_date.registerdatetime()):
         for linha in filetxt:
             dadovehicle = linha.split(';')
             if dadovehicle[0] == 'ENTRADA':
-                if dadovehicle[1] == plate:
+                if dadovehicle[1] == plate.upper():
                     platestatus = True
                     readplate(filename,plate,exittime)
         if platestatus == False:
