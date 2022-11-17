@@ -75,13 +75,14 @@ def arquivo_ler_saida(filename):
 # Registra entradas e saídas
 def reg_entrada(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     model_upper='DESCONHECIDO', color='DESCONHECIDO', 
-    dateandtime=Modules_PL.PL_date.registerdatetime()):
+    dateandtime='DESCONHECIDO'):
     plate = plate.upper()
     brand = str(input('Marca do veículo: '))
     brand_upper = brand.upper()
     model = str(input('Modelo: '))
     model_upper = model.upper()
     color = str(input('Cor: ')).upper()
+    dateandtime = Modules_PL.PL_date.registerdatetime()
     print()
     filetxt = open(filename, 'at')
     filetxt.write(f'ENTRADA;{plate};{brand_upper}/{model_upper};{color};{dateandtime}\n')
@@ -89,13 +90,14 @@ def reg_entrada(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
 
 def reg_saida(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     model_upper='DESCONHECIDO', color='DESCONHECIDO', 
-    dateandtime=Modules_PL.PL_date.registerdatetime()):
+    dateandtime='DESCONHECIDO'):
     plate = plate.upper()
     brand = str(input('Marca do veículo: '))
     brand_upper = brand.upper()
     model = str(input('Modelo: '))
     model_upper = model.upper()
     color = str(input('Cor: ')).upper()
+    dateandtime=Modules_PL.PL_date.registerdatetime()
     print()
     filetxt = open(filename, 'at')
     filetxt.write(f'SAIDA;{plate};{brand_upper}/{model_upper};{color};{dateandtime}\n')
@@ -118,7 +120,8 @@ def readplate(filename, plate, exittime):
                     exittime_datetime = datetime.strptime(exittime, "%H:%M:%S-%d/%m/%Y")
                     diftime = exittime_datetime - entracetime_datetime
                     print(f'Tempo estacionado: {diftime} (hh:mm:ss)') #tempo que ficou estacionado
-                    
+                    #Adicionar dados do veículo e sugerir reaproveitar
+
                     #diftime_str = str(diftime)
                     #diftime_str = diftime_str.split(':')
                     #diftime_hour = int(diftime_str[0]) #Pega o campo da hora
