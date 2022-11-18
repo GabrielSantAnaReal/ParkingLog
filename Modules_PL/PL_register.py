@@ -151,6 +151,21 @@ def plateexist(filename, plate, exittime=Modules_PL.PL_date.registerdatetime()):
                 if dadovehicle[1] == plate.upper():
                     platestatus = True
                     readplate(filename,plate,exittime)
+                    
+                    #Bloco sem teste
+                    print('Placa encontrada! As informações serão reaproveitadas!')
+                    print(f'Placa: {dadovehicle[1]}, Marca/Modelo: {dadovehicle[2]}, Cor: {dadovehicle[3]}')
+                    print('Se estiver tudo certo, pressione ENTER')
+                    user_input = str(input('Se alguma informações estiver incorreta, digite "não"')).upper().strip()
+                    if user_input == 'N':
+                        print('Registro manual das informações: ')
+                    else:
+                        plate_return = dadovehicle[1]
+                        marcamodelo = dadovehicle[2]
+                        color_return = dadovehicle[3]
+                        return plate_return & marcamodelo & color_return #testar
+                    #Fim do bloco sem teste
+                    
         if platestatus == False:
             print('Placa não encontrada!')
             optuser = str(input('Deseja registrar a saída assim mesmo? (Sim/Não): '))
