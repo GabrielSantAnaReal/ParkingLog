@@ -103,6 +103,17 @@ def reg_saida(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     filetxt.write(f'SAIDA;{plate};{brand_upper}/{model_upper};{color};{dateandtime}\n')
 
 
+def reg_saida_reuse(filename, plate, brand, model, color, dateandtime):
+    plate = plate.upper()
+    brand_upper = brand.upper()
+    model_upper = model.upper()
+    color_upper = color.upper()
+    dateandtime=Modules_PL.PL_date.registerdatetime()
+    print()
+    filetxt = open(filename, 'at')
+    filetxt.write(f'SAIDA;{plate};{brand_upper}/{model_upper};{color_upper};{dateandtime}\n')
+
+
 ###############################################################################
 # Mostra quanto tempo ficou estacionado
 def readplate(filename, plate, exittime):
@@ -133,12 +144,12 @@ def readplate(filename, plate, exittime):
                         diftime_hour_value = diftime_hour * 10 #(Valor a ser cobrado por hora, por exemplo) #TESTE
                         print(diftime_hour_value) #TESTE '''
         filetxt.close()
-        return diftime
+        #return diftime
 
 
 ###############################################################################
 # Verifica se a placa já tem registro
-def plateexist(filename, plate, exittime=Modules_PL.PL_date.registerdatetime()):
+def plateexist(filename, plate):
     try:
         filetxt = open(filename, 'rt', encoding='UTF-8')
     except:
@@ -150,21 +161,18 @@ def plateexist(filename, plate, exittime=Modules_PL.PL_date.registerdatetime()):
             if dadovehicle[0] == 'ENTRADA':
                 if dadovehicle[1] == plate.upper():
                     platestatus = True
-                    readplate(filename,plate,exittime)
-                    
-                    #Bloco sem teste
+                    print()
                     print('Placa encontrada! As informações serão reaproveitadas!')
                     print(f'Placa: {dadovehicle[1]}, Marca/Modelo: {dadovehicle[2]}, Cor: {dadovehicle[3]}')
                     print('Se estiver tudo certo, pressione ENTER')
-                    user_input = str(input('Se alguma informações estiver incorreta, digite "não"')).upper().strip()
+                    user_input = str(input('Se alguma informações estiver incorreta, digite "não": ')).upper().strip()
                     if user_input == 'N':
                         print('Registro manual das informações: ')
+                        reg_saida(filename, plate)
                     else:
-                        plate_return = dadovehicle[1]
-                        marcamodelo = dadovehicle[2]
-                        color_return = dadovehicle[3]
-                        return plate_return & marcamodelo & color_return #testar
-                    #Fim do bloco sem teste
+                        marca_modelo = dadovehicle[2].split('/')
+                        reg_saida_reuse(filename, plate, marca_modelo[0], marca_modelo[1],
+                        dadovehicle[3], Modules_PL.PL_date.registerdatetime())
                     
         if platestatus == False:
             print('Placa não encontrada!')

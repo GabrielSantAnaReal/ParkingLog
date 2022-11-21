@@ -51,7 +51,11 @@ while True:
                 break
             else:
                 if Module_REGISTER.plateexist(filename, textplate) == True:
-                    Module_REGISTER.reg_saida(filename, textplate)
+                    
+                    #NÃO ESTÁ FUNCIONANDO
+                    exittime_now = Module_DATE.registerdatetime()
+                    Module_REGISTER.readplate(filename, textplate, exittime_now)
+                    
                 else:
                     print('Registro de saída não foi feito!')
                     sleep(0.8)

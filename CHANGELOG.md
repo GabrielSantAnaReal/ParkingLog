@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12] (2022-11-21)
+
+**Pequenas correções e implementações**
+
+- Adicionada função que reutiliza dados da entrada do veículo no registro de saída;
+- Pequenas correções e ajustes internos.
+
 
 ## [0.11] (2022-11-08)
 
