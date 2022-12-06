@@ -39,7 +39,7 @@ def arquivo_ler(filename):
         for linha in filetxt:
             dadovehicle = linha.split(';')
             dadovehicle[1] = dadovehicle[1].replace('\n', '')
-            print(f'{dadovehicle[0]}/{dadovehicle[4]}/{dadovehicle[1]}/{dadovehicle[2]}/{dadovehicle[3]}\n')
+            print(f'{dadovehicle[0]}/{dadovehicle[5]}/{dadovehicle[1]}/{dadovehicle[2]}/{dadovehicle[3]}/{dadovehicle[4]}\n')
         filetxt.close()
 
 
@@ -53,7 +53,7 @@ def arquivo_ler_entrada(filename):
             dadovehicle = linha.split(';')
             dadovehicle[1] = dadovehicle[1].replace('\n', '')
             if dadovehicle[0] == 'ENTRADA':
-                print(f'{dadovehicle[0]}/{dadovehicle[4]}/{dadovehicle[1]}/{dadovehicle[2]}/{dadovehicle[3]}\n')
+                print(f'{dadovehicle[0]}/{dadovehicle[5]}/{dadovehicle[1]}/{dadovehicle[2]}/{dadovehicle[3]}/{dadovehicle[4]}\n')
         filetxt.close()
 
 
@@ -67,7 +67,7 @@ def arquivo_ler_saida(filename):
             dadovehicle = linha.split(';')
             dadovehicle[1] = dadovehicle[1].replace('\n', '')
             if dadovehicle[0] == 'SAIDA':
-                print(f'{dadovehicle[0]}/{dadovehicle[4]}/{dadovehicle[1]}/{dadovehicle[2]}/{dadovehicle[3]}\n')
+                print(f'{dadovehicle[0]}/{dadovehicle[5]}/{dadovehicle[1]}/{dadovehicle[2]}/{dadovehicle[3]}/{dadovehicle[4]}\n')
         filetxt.close()
 
 
@@ -85,7 +85,7 @@ def reg_entrada(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     dateandtime = Modules_PL.PL_date.registerdatetime()
     print()
     filetxt = open(filename, 'at')
-    filetxt.write(f'ENTRADA;{plate};{brand_upper}/{model_upper};{color};{dateandtime}\n')
+    filetxt.write(f'ENTRADA;{plate};{brand_upper};{model_upper};{color};{dateandtime}\n')
 
 
 def reg_saida(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
@@ -100,7 +100,7 @@ def reg_saida(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     dateandtime=Modules_PL.PL_date.registerdatetime()
     print()
     filetxt = open(filename, 'at')
-    filetxt.write(f'SAIDA;{plate};{brand_upper}/{model_upper};{color};{dateandtime}\n')
+    filetxt.write(f'SAIDA;{plate};{brand_upper};{model_upper};{color};{dateandtime}\n')
 
 
 def reg_saida_reuse(filename, plate, brand, model, color, dateandtime):
@@ -111,7 +111,7 @@ def reg_saida_reuse(filename, plate, brand, model, color, dateandtime):
     dateandtime=Modules_PL.PL_date.registerdatetime()
     print()
     filetxt = open(filename, 'at')
-    filetxt.write(f'SAIDA;{plate};{brand_upper}/{model_upper};{color_upper};{dateandtime}\n')
+    filetxt.write(f'SAIDA;{plate};{brand_upper};{model_upper};{color_upper};{dateandtime}\n')
 
 
 ###############################################################################
@@ -126,7 +126,7 @@ def readplate(filename, plate, exittime):
             dadovehicle = linha.split(';')
             if dadovehicle[0] == 'ENTRADA':
                 if dadovehicle[1] == plate:
-                    entracedatetime = dadovehicle[4].replace('\n', '')
+                    entracedatetime = dadovehicle[5].replace('\n', '')
                     entracetime_datetime = datetime.strptime(entracedatetime, "%H:%M:%S-%d/%m/%Y")
                     exittime_datetime = datetime.strptime(exittime, "%H:%M:%S-%d/%m/%Y")
                     diftime = exittime_datetime - entracetime_datetime
@@ -163,7 +163,7 @@ def plateexist(filename, plate):
                     platestatus = True
                     print()
                     print('Placa encontrada! As informações serão reaproveitadas!')
-                    print(f'Placa: {dadovehicle[1]}, Marca/Modelo: {dadovehicle[2]}, Cor: {dadovehicle[3]}')
+                    print(f'Placa: {dadovehicle[1]}, Marca/Modelo: {dadovehicle[2]}/{dadovehicle[3]}, Cor: {dadovehicle[4]}')
                     print('Se estiver tudo certo, pressione ENTER')
                     user_input = str(input('Se alguma informações estiver incorreta, digite "não": ')).upper().strip()
                     if user_input == 'N':
@@ -171,8 +171,8 @@ def plateexist(filename, plate):
                         reg_saida(filename, plate)
                     else:
                         marca_modelo = dadovehicle[2].split('/')
-                        reg_saida_reuse(filename, plate, marca_modelo[0], marca_modelo[1],
-                        dadovehicle[3], Modules_PL.PL_date.registerdatetime())
+                        reg_saida_reuse(filename, plate, dadovehicle[2], dadovehicle[3],
+                        dadovehicle[4], Modules_PL.PL_date.registerdatetime())
                     
         if platestatus == False:
             print('Placa não encontrada!')
