@@ -20,10 +20,10 @@ Module_OS.path_OS()
 
 datefilename = Module_DATE.PLdate_filename()
 #TO-DO: pegar data antes de cada execução
-filename = '20220901.txt' #teste, substituir por data do dia
-#filename = datefilename + '.txt'
-#if not Module_REGISTER.arquivo_existe(filename):
-#    Module_REGISTER.arquivo_criar(filename)
+#filename = '20220901.txt' #teste, substituir por data do dia
+filename = datefilename + '.txt'
+if not Module_REGISTER.arquivo_existe(filename):
+    Module_REGISTER.arquivo_criar(filename)
 
 while True:
     Module_UI.ui_menu('Parking Log APLHA',40)
@@ -89,7 +89,7 @@ while True:
     elif opt == 7:
         # Apaga algum registro específico do dia
         print()
-        print('ATENÇÃO: Esse menu apaga registros de forma permanente!')
+        print('ATENÇÃO: Este menu apaga registros de forma permanente!')
         print('PROSSIGA COM CUIDADO!')
         sleep(1)
         print()

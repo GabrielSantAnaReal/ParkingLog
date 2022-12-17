@@ -165,12 +165,13 @@ def plateexist(filename, plate):
                     print('Placa encontrada! As informações serão reaproveitadas!')
                     print(f'Placa: {dadovehicle[1]}, Marca/Modelo: {dadovehicle[2]}/{dadovehicle[3]}, Cor: {dadovehicle[4]}')
                     print('Se estiver tudo certo, pressione ENTER')
-                    user_input = str(input('Se alguma informações estiver incorreta, digite "não": ')).upper().strip()
+                    user_input = str(input('Se alguma das informações estiver incorreta, digite "não": ')).upper().strip()
                     if user_input == 'N':
                         print('Registro manual das informações: ')
                         reg_saida(filename, plate)
                     else:
-                        marca_modelo = dadovehicle[2].split('/')
+                        #marca_modelo = dadovehicle[2].split('/') #retirar se não precisar
+                        #colocado como comentário em 17/12
                         reg_saida_reuse(filename, plate, dadovehicle[2], dadovehicle[3],
                         dadovehicle[4], Modules_PL.PL_date.registerdatetime())
                     
