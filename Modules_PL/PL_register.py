@@ -117,6 +117,7 @@ def reg_saida_reuse(filename, plate, brand, model, color, dateandtime):
 ###############################################################################
 # Mostra quanto tempo ficou estacionado
 def readplate(filename, plate, exittime):
+    #só está funcionando se já coolocar a placa em CAPSLOCK
     try:
         filetxt = open(filename, 'rt', encoding='UTF-8')
     except:
