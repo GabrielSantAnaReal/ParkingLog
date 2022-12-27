@@ -46,13 +46,12 @@ while True:
         while True:
             print()
             Module_UI.ui_options('Registro de saída de veículos',40)
-            textplate = str(input('Digite a placa ("SAIR" para sair): '))
-            if textplate.upper() == 'SAIR':
+            textplate = str(input('Digite a placa ("SAIR" para sair): ')).upper()
+            if textplate == 'SAIR':
                 break
             else:
                 if Module_REGISTER.plateexist(filename, textplate) == True:
                     
-                    #NÃO ESTÁ FUNCIONANDO
                     exittime_now = Module_DATE.registerdatetime()
                     Module_REGISTER.readplate(filename, textplate, exittime_now)
                     

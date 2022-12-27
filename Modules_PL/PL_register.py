@@ -131,8 +131,8 @@ def readplate(filename, plate, exittime):
                     entracetime_datetime = datetime.strptime(entracedatetime, "%H:%M:%S-%d/%m/%Y")
                     exittime_datetime = datetime.strptime(exittime, "%H:%M:%S-%d/%m/%Y")
                     diftime = exittime_datetime - entracetime_datetime
-                    print(f'Tempo estacionado: {diftime} (hh:mm:ss)') #tempo que ficou estacionado
-                    #Adicionar dados do veículo e sugerir reaproveitar
+                    print(f'Tempo estacionado: {diftime} (hh:mm:ss)')
+                    #tempo que ficou estacionado
 
                     #diftime_str = str(diftime)
                     #diftime_str = diftime_str.split(':')
@@ -171,8 +171,6 @@ def plateexist(filename, plate):
                         print('Registro manual das informações: ')
                         reg_saida(filename, plate)
                     else:
-                        #marca_modelo = dadovehicle[2].split('/') #retirar se não precisar
-                        #colocado como comentário em 17/12
                         reg_saida_reuse(filename, plate, dadovehicle[2], dadovehicle[3],
                         dadovehicle[4], Modules_PL.PL_date.registerdatetime())
                     
@@ -209,13 +207,35 @@ def eraseplate(filename):
     if erase_opt.strip().upper()[0] == 'E':
         plate_opt = str(input('Placa para apagar entrada: ')).upper().strip()
         #Se tiver saída registrada, bloquear
-        eraseplate_openwrite(filename, plate_opt, 'ENTRADA')
+
+        # Teste (27/12/2022)
+        try:
+            filetxt = open(filename, 'rt', encoding='UTF-8')
+        except:
+            print('Erro ao ler o arquivo! Verifique se ele existe!')
+        else:
+            platestatus = False
+            for linha in filetxt:
+                dadovehicle = linha.split(';')
+                if dadovehicle[0] == 'SAIDA':
+                    if dadovehicle[1] == plate_opt.upper():
+                        platestatus = True
+        filetxt.close()
+        # Teste
+
+        if platestatus == False:
+            eraseplate_openwrite(filename, plate_opt, 'ENTRADA')
+        else:
+            print('Atenção! Saída já registrada! Apague primeiro a saída e depois a entrada!')
+
     elif erase_opt.strip().upper()[0] == 'S':
         plate_opt = str(input('Placa para apagar saída: ')).upper().strip()
         #Só apagar entradas de até 10 minutos atrás! #TO-DO
         eraseplate_openwrite(filename, plate_opt, 'SAIDA')
+
     elif erase_opt.strip().upper()[0] == 'F':
         erase_opt = 'sair'
         return erase_opt
+
     else:
-        print('Digite opção válida!')
+        print('Digite um opção válida!')
