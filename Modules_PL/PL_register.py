@@ -76,7 +76,7 @@ def arquivo_ler_saida(filename):
 def reg_entrada(filename, plate='DESCONHECIDO', brand_upper='DESCONHECIDO',
     model_upper='DESCONHECIDO', color='DESCONHECIDO', 
     dateandtime='DESCONHECIDO'):
-    plate = plate.upper()
+    plate = plate.upper() #Converte a placa digitada para CAPS LOCK
     brand = str(input('Marca do veículo: '))
     brand_upper = brand.upper()
     model = str(input('Modelo: '))
@@ -231,7 +231,44 @@ def eraseplate(filename):
     elif erase_opt.strip().upper()[0] == 'S':
         plate_opt = str(input('Placa para apagar saída: ')).upper().strip()
         #Só apagar entradas de até 10 minutos atrás! #TO-DO
-        eraseplate_openwrite(filename, plate_opt, 'SAIDA')
+        
+        # Teste (28/12/2022), concluir depois
+        '''
+        try:
+            filetxt = open(filename, 'rt', encoding='UTF-8')
+        except:
+            print('Erro ao ler o arquivo! Verifique se ele existe!')
+        else:
+            status_erase = False
+            for linha in filetxt:
+                dadovehicle = linha.split(';')
+                if dadovehicle[0] == 'SAIDA':
+                    if dadovehicle[1] == plate_opt.upper():
+                        actualtime = Modules_PL.PL_date.registerdatetime()
+                        actualtime_string = datetime.strptime(actualtime, "%H:%M:%S-%d/%m/%Y")
+
+                        #função de diferença de tempo que funciona
+                        entracedatetime_erase = dadovehicle[5].replace('\n', '')
+                        entracetime_datetime_erase = datetime.strptime(entracedatetime_erase, "%H:%M:%S-%d/%m/%Y")
+
+                        diftime_erase = actualtime_string - entracetime_datetime_erase
+                        
+                        tenminutes = '0:10:00'
+                        tenminutes_string = datetime.strptime(tenminutes, "%H:%M:%S")
+
+                        #Ocorreu uma exceção: TypeError
+                        #'<=' not supported between instances of 'datetime.timedelta' and 'datetime.datetime'
+                        if diftime_erase <= tenminutes_string:
+                            status_erase = True
+        
+        filetxt.close()
+        '''
+        # Teste
+        
+        '''
+        if status_erase == True:
+            eraseplate_openwrite(filename, plate_opt, 'SAIDA')
+            '''
 
     elif erase_opt.strip().upper()[0] == 'F':
         erase_opt = 'sair'
