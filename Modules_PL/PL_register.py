@@ -4,6 +4,8 @@ de leitura, gravação e criação dos respectivos arquivos.
 """
 
 from datetime import datetime
+from datetime import timedelta
+from time import sleep
 import Modules_PL.PL_date
 
 
@@ -207,8 +209,8 @@ def eraseplate(filename):
     if erase_opt.strip().upper()[0] == 'E':
         plate_opt = str(input('Placa para apagar entrada: ')).upper().strip()
         #Se tiver saída registrada, bloquear
+        #To-do: bloquear apagar saídas de mais de 10 minutos atrás (?)
 
-        # Teste (27/12/2022)
         try:
             filetxt = open(filename, 'rt', encoding='UTF-8')
         except:
@@ -221,7 +223,6 @@ def eraseplate(filename):
                     if dadovehicle[1] == plate_opt.upper():
                         platestatus = True
         filetxt.close()
-        # Teste
 
         if platestatus == False:
             eraseplate_openwrite(filename, plate_opt, 'ENTRADA')
@@ -230,10 +231,8 @@ def eraseplate(filename):
 
     elif erase_opt.strip().upper()[0] == 'S':
         plate_opt = str(input('Placa para apagar saída: ')).upper().strip()
-        #Só apagar entradas de até 10 minutos atrás! #TO-DO
+        #Só apaga saídas de até 10 minutos após o registro da mesma.
         
-        # Teste (28/12/2022), concluir depois
-        '''
         try:
             filetxt = open(filename, 'rt', encoding='UTF-8')
         except:
@@ -246,29 +245,27 @@ def eraseplate(filename):
                     if dadovehicle[1] == plate_opt.upper():
                         actualtime = Modules_PL.PL_date.registerdatetime()
                         actualtime_string = datetime.strptime(actualtime, "%H:%M:%S-%d/%m/%Y")
+                        #Pega a hora atual e converte em formato compatível
 
-                        #função de diferença de tempo que funciona
-                        entracedatetime_erase = dadovehicle[5].replace('\n', '')
-                        entracetime_datetime_erase = datetime.strptime(entracedatetime_erase, "%H:%M:%S-%d/%m/%Y")
+                        exitdatetime_erase = dadovehicle[5].replace('\n', '')
+                        exit_datetime_erase = datetime.strptime(exitdatetime_erase, "%H:%M:%S-%d/%m/%Y")
+                        #Pega o horário de saída registrado
 
-                        diftime_erase = actualtime_string - entracetime_datetime_erase
-                        
-                        tenminutes = '0:10:00'
-                        tenminutes_string = datetime.strptime(tenminutes, "%H:%M:%S")
+                        tenminutes = exit_datetime_erase + timedelta(minutes=10)
+                        #Pega o horário de saída e soma 10 minutos para cálculo
 
-                        #Ocorreu uma exceção: TypeError
-                        #'<=' not supported between instances of 'datetime.timedelta' and 'datetime.datetime'
-                        if diftime_erase <= tenminutes_string:
+                        if actualtime_string <= tenminutes:
                             status_erase = True
-        
         filetxt.close()
-        '''
-        # Teste
-        
-        '''
+
         if status_erase == True:
             eraseplate_openwrite(filename, plate_opt, 'SAIDA')
-            '''
+        else:
+            print()
+            print('Saída registrada há mais de 10 minutos! Não é possível apagar o registro.')
+            print('Em caso de problemas, contate o administrador do sistema!')
+            sleep(1.5)
+            press_enter = str(input('Pressione ENTER para voltar ao menu principal'))  
 
     elif erase_opt.strip().upper()[0] == 'F':
         erase_opt = 'sair'

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13] (2022-12-29)
+
+**Pequenas correções e implementações**
+
+- Substituir a forma de salvar marca e modelo do veículo ("marca/modelo" para "marca;modelo");
+- Função "readplate" (PL_register/readplate) consertada;
+- Só podem ser apagadas saídas de até 10 minutos depois do registro da mesma;
+- Corrigido a forma com que as funções pegam a data e hora.
+
+
 ## [0.12] (2022-11-21)
 
 **Pequenas correções e implementações**
