@@ -14,12 +14,12 @@ import Modules_PL.PL_date as Module_DATE
 import Modules_PL.PL_interface as Module_UI
 import Modules_PL.PL_list as Module_LIST
 import Modules_PL.PL_OS as Module_OS
+import Modules_PL.PL_plate as Module_PLATE
 from time import sleep
 
 Module_OS.path_OS()
 
 datefilename = Module_DATE.PLdate_filename()
-#TO-DO: pegar data antes de cada execução
 #filename = '20220901.txt' #teste, substituir por data do dia
 filename = datefilename + '.txt'
 if not Module_REGISTER.arquivo_existe(filename):

@@ -1,7 +1,10 @@
 # To-do
 
 ## [0.14]
-**Aguardando demandas**
+
+**Limpeza e organização de funções**
+
+- Separar as funções relacionadas as placas e manipulação de dados dos veículos das funções de registro e criação dos arquivos para o registro. Motivo: limpeza do código e melhorar a organização.
 
 
 ## [0.13] (Released in 2022-12-29)
