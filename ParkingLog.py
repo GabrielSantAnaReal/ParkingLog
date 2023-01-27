@@ -28,6 +28,7 @@ if not Module_REGISTER.arquivo_existe(filename):
 while True:
     Module_UI.ui_menu('Parking Log APLHA',40)
     opt = int(input('Digite a opção desejada: '))
+    #opt dá erro se inserir string
 
     if opt == 1:
         # Registra entradas
@@ -50,10 +51,10 @@ while True:
             if textplate == 'SAIR':
                 break
             else:
-                if Module_REGISTER.plateexist(filename, textplate) == True:
+                if Module_PLATE.plateexist(filename, textplate) == True:
                     
                     exittime_now = Module_DATE.registerdatetime()
-                    Module_REGISTER.readplate(filename, textplate, exittime_now)
+                    Module_PLATE.readplate(filename, textplate, exittime_now)
                     
                 else:
                     print('Registro de saída não foi feito!')
@@ -92,7 +93,7 @@ while True:
         print('PROSSIGA COM CUIDADO!')
         sleep(1)
         print()
-        Module_REGISTER.eraseplate(filename)
+        Module_PLATE.eraseplate(filename)
         print()
 
     elif opt == 8:

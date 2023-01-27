@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14] (2023-01-27)
+
+**Separação de funções do módulo de registro**
+
+- Separação das funções relacionadas as placas e manipulação de dados dos veículos das funções de registro e criação dos arquivos para o registro, buscando tornar o código mais limpo e organizado.
+
+
 ## [0.13] (2022-12-29)
 
 **Pequenas correções e implementações**
