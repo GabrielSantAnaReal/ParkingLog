@@ -27,10 +27,10 @@ if not Module_REGISTER.arquivo_existe(filename):
 
 while True:
     Module_UI.ui_menu('Parking Log APLHA',40)
-    opt = int(input('Digite a opção desejada: '))
+    opt = str(input('Digite a opção desejada: '))
     #opt dá erro se inserir string
 
-    if opt == 1:
+    if opt == '1':
         # Registra entradas
         print()
         while True:
@@ -41,7 +41,7 @@ while True:
             else:
                 Module_REGISTER.reg_entrada(filename, textplate)
     
-    elif opt == 2:
+    elif opt == '2':
         # Registra saídas
         #TO-DO: Melhorar saídas: se a placa existir, sugerir preencher dados
         while True:
@@ -60,33 +60,33 @@ while True:
                     print('Registro de saída não foi feito!')
                     sleep(0.8)
     
-    elif opt == 3:
+    elif opt == '3':
         # Ver todos os cadastros do dia
         print()
         Module_REGISTER.arquivo_ler(filename)
         pressenter = str(input('Pressione ENTER para voltar ao menu'))
         print()
 
-    elif opt == 4:
+    elif opt == '4':
         # Ver somente entradas
         print()
         Module_REGISTER.arquivo_ler_entrada(filename)
         pressenter = str(input('Pressione ENTER para voltar ao menu'))
         print()
 
-    elif opt == 5:
+    elif opt == '5':
         # Ver somente saídas
         print()
         Module_REGISTER.arquivo_ler_saida(filename)
         pressenter = str(input('Pressione ENTER para voltar ao menu'))
         print()
 
-    elif opt == 6:
+    elif opt == '6':
         # Cadastros de outro dia
         print() 
         Module_LIST.vercadastros()
 
-    elif opt == 7:
+    elif opt == '7':
         # Apaga algum registro específico do dia
         print()
         print('ATENÇÃO: Este menu apaga registros de forma permanente!')
@@ -96,7 +96,7 @@ while True:
         Module_PLATE.eraseplate(filename)
         print()
 
-    elif opt == 8:
+    elif opt == '8':
         print('Saindo...')
         break
 

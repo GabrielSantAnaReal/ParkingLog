@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15] (2023-02-11)
+
+**Pequenas correções e alteração do tipo de variável**
+
+- A variável "opt" do menu principal (ParkingLog.py) dava erro se digitasse string. O "else" para opções erradas só funcionava se fosse inserido um número inteiro ("int" type). Problema devidamente corrigido.
+
+
 ## [0.14] (2023-01-27)
 
 **Separação de funções do módulo de registro**

@@ -1,10 +1,10 @@
 # To-do
 
-## [0.15]
+## [0.15] (Released in 2023-02-11)
 
 **Pequenas correções**
 
-- A variável "opt" do menu principal (ParkingLog.py) dá erro se digitar string. O "else" para opções erradas só funciona se for inserido um número inteiro ("int" type),
+- A variável "opt" do menu principal (ParkingLog.py) dá erro se digitar string. O "else" para opções erradas só funciona se for inserido um número inteiro ("int" type).
 
 
 ## [0.14] (Released in 2023-01-27)
